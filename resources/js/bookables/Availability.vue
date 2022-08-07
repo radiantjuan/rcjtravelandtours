@@ -1,9 +1,10 @@
 <template>
     <div>
-        <h6 class="text-uppercase text-secondary font-weight-bolder">Check Availability <span
-            :class="[{'text-success': hasAvailability, 'text-danger':hasNoAvailability}]">{{
-                hasAvailability ? '(AVAILABLE)' : ''
-            }}{{ hasNoAvailability ? '(NOT AVAILABLE)' : '' }}</span>
+        <h6 class="text-uppercase text-secondary font-weight-bolder">Check Availability
+            <transition name="fade">
+                <span class="text-danger" v-if="hasNoAvailability">(NOT AVAILABLE)</span>
+                <span class="text-success" v-if="hasAvailability">(AVAILABLE)</span>
+            </transition>
         </h6>
         <div class="form-row">
             <div class="col">
@@ -22,7 +23,10 @@
             </div>
         </div>
         <p v-if="loading">processing...</p>
-        <button class="btn btn-secondary btn-block btn-md mt-3" @click="check();" :disabled="loading">Check!</button>
+        <button class="btn btn-secondary btn-block btn-md mt-3" @click="check();" :disabled="loading">
+            <span v-if="!loading">Check!</span>
+            <span v-if="loading"><i class="fas fa-circle-notch fa-spin"></i> Checking...</span>
+        </button>
     </div>
 </template>
 <style scoped>
@@ -65,14 +69,16 @@ export default {
             axios.get(`/api/bookable/${this.bookableId}/availability?from=${this.from}&to=${this.to}`)
                 .then((res) => {
                     this.status = res.status;
+                    this.$emit('availability', this.hasAvailability);
                 })
                 .catch((err) => {
                     if (is422(err)) {
                         this.errors = err.response.data.errors;
                     }
                     this.status = err.response.status;
+                    this.$emit('availability', this.hasAvailability);
                 })
-                .finally(() => {
+                .then(() => {
                     this.loading = false;
                 });
         }
