@@ -12,8 +12,8 @@ export default {
     },
     actions: {
         setLastSearch(context, payload) {
-            context.commit('setLastSearch');
             localStorage.setItem('lastSearch', JSON.stringify(payload));
+            context.commit('setLastSearch', payload);
         },
         loadStoredState(context) {
             const lastSearch = localStorage.getItem('lastSearch');
