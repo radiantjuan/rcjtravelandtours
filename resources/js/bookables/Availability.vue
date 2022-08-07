@@ -36,15 +36,16 @@ label {
 <script>
 import {is404, is422} from "../shared/utils/response";
 import validationErrors from "../shared/mixins/validationErrors";
+
 export default {
     mixins: [validationErrors],
     props: {
-      bookableId: String
+        bookableId: [String, Number]
     },
     data() {
         return {
-            from: null,
-            to: null,
+            from: this.$store.state.lastSearch.from,
+            to: this.$store.state.lastSearch.to,
             loading: false,
             status: null,
             errors: null
@@ -53,6 +54,14 @@ export default {
     methods: {
         check() {
             this.loading = true;
+            this.errors = null;
+
+            //global state
+            this.$store.dispatch('setLastSearch', {
+                from: this.from,
+                to: this.to
+            })
+
             axios.get(`/api/bookable/${this.bookableId}/availability?from=${this.from}&to=${this.to}`)
                 .then((res) => {
                     this.status = res.status;
