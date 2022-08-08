@@ -2474,7 +2474,12 @@ var render = function render() {
     staticClass: "text-uppercase text-secondary font-weight-bolder"
   }, [_vm._v("Your Cart")]), _vm._v(" "), _c("h6", {
     staticClass: "badge badge-secondary text-uppercase"
-  }, [_vm.itemsInBasket ? _c("span", [_vm._v(_vm._s(_vm.itemsInBasket))]) : _c("span", [_vm._v("Empty")])])]), _vm._v(" "), _vm._l(_vm.basket, function (item) {
+  }, [_vm.itemsInBasket ? _c("span", [_vm._v(_vm._s(_vm.itemsInBasket))]) : _c("span", [_vm._v("Empty")])])]), _vm._v(" "), _c("transition-group", {
+    attrs: {
+      name: "fade",
+      tag: "div"
+    }
+  }, _vm._l(_vm.basket, function (item) {
     return _c("div", {
       key: item.bookable.id
     }, [_c("div", {
@@ -2506,7 +2511,7 @@ var render = function render() {
     }, [_c("i", {
       staticClass: "fas fa-trash-alt"
     })])])]);
-  })], 2)])]);
+  }), 0)], 1)])]);
 };
 
 var staticRenderFns = [];
