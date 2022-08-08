@@ -22,9 +22,17 @@
                     <price-breakdown v-if="price" :price="price" class="pb-3"/>
                 </transition>
                 <transition name="fade">
-                    <button class="btn btn-outline-secondary btn-block" v-if="price">Book Now</button>
+                    <button class="btn btn-outline-secondary btn-block" v-if="price" @click="addToBasket"
+                            :disabled="inBasketAlready">
+                        Book Now
+                    </button>
                 </transition>
-
+                <button class="btn btn-outline-secondary btn-block" v-if="inBasketAlready" @click="removeFromBasket">
+                    Remove from basket
+                </button>
+                <div v-if="inBasketAlready" class="mt-4 text-muted warning">Seems like you've added this object
+                    already.
+                </div>
             </div>
         </div>
     </div>
@@ -51,9 +59,18 @@ export default {
         const bookable_id = this.$route.params.id;
         axios.get(`/api/booklist/${bookable_id}`).then((res) => this.book_info = res.data);
     },
-    computed: mapState({
-        lastSearch: 'lastSearch'
-    }),
+    computed: {
+        ...mapState({
+            lastSearch: 'lastSearch'
+        }),
+        inBasketAlready() {
+            if (null === this.book_info) {
+                return false
+            }
+
+            return this.$store.getters.inBasketAlready(this.book_info.id);
+        }
+    },
     methods: {
         checkPrice(hasAvailability) {
             if (!hasAvailability) {
@@ -75,7 +92,22 @@ export default {
                 .catch(err => {
                     this.price = null;
                 });
+        },
+        addToBasket() {
+            this.$store.dispatch('addToBasket', {
+                bookable: this.book_info,
+                price: this.price,
+                dates: this.lastSearch
+            });
+        },
+        removeFromBasket() {
+            this.$store.dispatch('removeFromBasket', this.book_info.id);
         }
     }
 }
 </script>
+<style scoped>
+.warning {
+    font-size: 0.7rem;
+}
+</style>
