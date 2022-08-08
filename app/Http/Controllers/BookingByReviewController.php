@@ -1,4 +1,11 @@
 <?php
+/**
+ * Booking By review Controller
+ * Handles request to check if there is no existing review
+ *
+ * @author    Radiant Juan <radiantcjuan@gmail.com>
+ * @copyright RCJWorks 2022
+ */
 
 namespace App\Http\Controllers;
 
@@ -12,10 +19,16 @@ class BookingByReviewController extends Controller {
      * Handle the incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @return
+     * @return \App\Http\Resources\BookingByReviewShowResource|boolean
      */
     public function __invoke($review_key, Request $request) {
         $booking = Booking::findByReviewKey($review_key);
-        return $booking ? new BookingByReviewShowResource(Booking::findByReviewKey($review_key)) ?? abort(404) : abort(404);
+        $return = false;
+        if ($booking) {
+            $return = new BookingByReviewShowResource(Booking::findByReviewKey($review_key));
+        } else {
+            abort(404);
+        }
+        return $return;
     }
 }

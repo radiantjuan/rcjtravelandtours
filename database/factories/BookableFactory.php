@@ -8,11 +8,13 @@ use Illuminate\Support\Arr;
 
 $suffix = [
     'Villa',
-    'Kabayo',
-    'Quezon',
-    'Aso',
-    'Pusa',
-    'Daga'
+    'Resort',
+    'Suite',
+    'Hotel',
+    'House',
+    'Pool',
+    'Beach',
+    'Staycation'
 ];
 
 $factory->define(Bookable::class, function (Faker $faker) use($suffix){

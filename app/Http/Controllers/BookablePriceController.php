@@ -1,4 +1,11 @@
 <?php
+/**
+ * Bookable Price Controller
+ * Handles price calculation requests
+ *
+ * @author    Radiant Juan <radiantcjuan@gmail.com>
+ * @copyright RCJWorks 2022
+ */
 
 namespace App\Http\Controllers;
 
@@ -11,7 +18,7 @@ class BookablePriceController extends Controller {
      * Handle the incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @return string
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke($id, Request $request) {
         $bookable = Bookable::findOrFail($id);

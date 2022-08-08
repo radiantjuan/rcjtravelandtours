@@ -1,4 +1,11 @@
 <?php
+/**
+ * Bookable Controller
+ * Handles showing the list of bookable resorts and showing each
+ *
+ * @author    Radiant Juan <radiantcjuan@gmail.com>
+ * @copyright RCJWorks 2022
+ */
 
 namespace App\Http\Controllers;
 
@@ -10,30 +17,10 @@ class BookableController extends Controller {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index(Request $request) {
         return BookableIndexResource::collection(Bookable::all());
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request) {
-        //
     }
 
     /**
@@ -43,37 +30,6 @@ class BookableController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        return \App\Bookable::findOrFail($id);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id) {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id) {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id) {
-        //
+        return Bookable::findOrFail($id);
     }
 }
