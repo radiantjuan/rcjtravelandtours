@@ -2,7 +2,7 @@
     <div>
         <nav class="navbar bg-white border-bottom navbar-light">
             <router-link v-bind:to="{ name: 'bookables' }" class="navbar-brand mr-auto">RCJ Hotel Travel</router-link>
-            <router-link class="btn nav-button" :to="{name: 'home'}">
+            <router-link class="btn nav-button" :to="{name: 'basket'}">
                 <i class="fa fa-cart-plus"></i>
                 <span v-if="itemsInBasket" class="badge badge-secondary">{{ itemsInBasket }}</span>
             </router-link>

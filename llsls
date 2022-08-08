@@ -1,0 +1,51 @@
+[33mcommit 3e5543a35385e48b2bb5346df03d02dfddabf3e9[m[33m ([m[1;36mHEAD -> [m[1;32mbasket_and_checkout[m[33m, [m[1;31morigin/basket_and_checkout[m[33m)[m
+Author: Radiant Juan <rjuan@buyster.local>
+Date:   Mon Aug 8 18:13:12 2022 +0800
+
+    Keeping basket state in localStorage
+
+[33mcommit ca3476af1ee932bf6cb99fc7b5b40ca2db1f70af[m[33m ([m[1;31morigin/master[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: 67850ba 42007b0
+Author: Radiant Juan <rjuan@buyster.local>
+Date:   Sun Aug 7 20:24:30 2022 +0800
+
+    Merge branch 'master' of github.com:radiantjuan/rcjtravelandtours
+
+[33mcommit 67850ba55cf06771832771ccf4e7515dc5b51054[m
+Author: Radiant Juan <rjuan@buyster.local>
+Date:   Sun Aug 7 20:23:43 2022 +0800
+
+    change title
+
+[33mcommit 42007b09f472dec87ce2e577a5a1d47d05335b33[m
+Merge: fbd7922 f3274c5
+Author: RCJWorks <radiantcjuan@gmail.com>
+Date:   Sun Aug 7 20:10:46 2022 +0800
+
+    Merge pull request #1 from radiantjuan/price_break_down_component
+    
+    price_break_down
+
+[33mcommit f3274c561a2edb4b5127df59e5733b157941eef8[m[33m ([m[1;31morigin/price_break_down_component[m[33m, [m[1;32mprice_break_down_component[m[33m)[m
+Author: Radiant Juan <rjuan@buyster.local>
+Date:   Sun Aug 7 20:08:17 2022 +0800
+
+    price_break_down
+
+[33mcommit fbd7922387019013bfbe3e315e5f413b7c59fcb5[m
+Author: Radiant Juan <rjuan@buyster.local>
+Date:   Sun Aug 7 17:34:26 2022 +0800
+
+    done adding vuex global state
+
+[33mcommit 86bf3ebe3c7ac1761627a5787489b6c62ee1af59[m
+Author: Radiant Juan <rjuan@buyster.local>
+Date:   Sun Aug 7 16:36:49 2022 +0800
+
+    added read md
+
+[33mcommit 6174581a10ca4b8ef1339c66c9a9abeaa9a3ab83[m
+Author: Radiant Juan <rjuan@buyster.local>
+Date:   Sun Aug 7 16:35:04 2022 +0800
+
+    first commits
