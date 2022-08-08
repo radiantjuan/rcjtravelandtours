@@ -56,6 +56,9 @@ export default {
         }
     },
     methods: {
+        /**
+         * Checking booking availability in the backend
+         */
         check() {
             this.loading = true;
             this.errors = null;
@@ -84,12 +87,26 @@ export default {
         }
     },
     computed: {
+        /**
+         * Checking if the returned response has errors
+         * @returns {boolean}
+         */
         hasErrors() {
             return 422 === this.status && this.errors !== null
         },
+        /**
+         * Checking if the returned response is success
+         * @returns {boolean}
+         */
         hasAvailability() {
             return 200 === this.status;
         },
+        /**
+         * The returned response has the right data
+         * if the status is 404, it means the database didn't get any record
+         * the backend is forcing it to have a 404 not found
+         * @returns {boolean}
+         */
         hasNoAvailability() {
             return 404 === this.status;
         }

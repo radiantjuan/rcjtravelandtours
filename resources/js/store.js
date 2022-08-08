@@ -23,10 +23,19 @@ export default {
         }
     },
     actions: {
+        /**
+         * Setting the last search from and to dates
+         * @param context
+         * @param payload
+         */
         setLastSearch(context, payload) {
             localStorage.setItem('lastSearch', JSON.stringify(payload));
             context.commit('setLastSearch', payload);
         },
+        /**
+         * loading stored state from local storage
+         * @param commit
+         */
         loadStoredState({commit}) {
             const lastSearch = localStorage.getItem('lastSearch');
             if (lastSearch) {
@@ -38,10 +47,22 @@ export default {
                 commit('setBasket', JSON.parse(basket));
             }
         },
+        /**
+         * Adding bookings to cart
+         * @param commit
+         * @param state
+         * @param payload
+         */
         addToBasket({commit, state}, payload) {
             commit('addToBasket', payload);
             localStorage.setItem('basket', JSON.stringify(state.basket));
         },
+        /**
+         * Removing bookings to cart
+         * @param commit
+         * @param state
+         * @param payload
+         */
         removeFromBasket({commit, state}, payload) {
             commit('removeFromBasket', payload);
             localStorage.setItem('basket', JSON.stringify(state.basket));

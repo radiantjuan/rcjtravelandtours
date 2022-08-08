@@ -1,4 +1,11 @@
 <?php
+/**
+ * Review Controller
+ * This handles the storing of reviews for the bookable
+ *
+ * @author    Radiant Juan <radiantcjuan@gmail.com>
+ * @copyright RCJWorks 2022
+ */
 
 namespace App\Http\Controllers;
 

@@ -1954,6 +1954,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    /**
+     * Checking booking availability in the backend
+     */
     check: function check() {
       var _this = this;
 
@@ -1982,12 +1985,28 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    /**
+     * Checking if the returned response has errors
+     * @returns {boolean}
+     */
     hasErrors: function hasErrors() {
       return 422 === this.status && this.errors !== null;
     },
+
+    /**
+     * Checking if the returned response is success
+     * @returns {boolean}
+     */
     hasAvailability: function hasAvailability() {
       return 200 === this.status;
     },
+
+    /**
+     * The returned response has the right data
+     * if the status is 404, it means the database didn't get any record
+     * the backend is forcing it to have a 404 not found
+     * @returns {boolean}
+     */
     hasNoAvailability: function hasNoAvailability() {
       return 404 === this.status;
     }
@@ -2042,6 +2061,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])({
     lastSearch: 'lastSearch'
   })), {}, {
+    /**
+     * Checking if the item is in basket already from global state
+     * @returns {boolean|*}
+     */
     inBasketAlready: function inBasketAlready() {
       if (null === this.book_info) {
         return false;
@@ -2051,6 +2074,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   methods: {
+    /**
+     * Check the price stored in the backend
+     * @param hasAvailability
+     */
     checkPrice: function checkPrice(hasAvailability) {
       var _this2 = this;
 
@@ -2350,18 +2377,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   computed: {
+    /**
+     * Checks if the booking is already been reviewed
+     * @returns {boolean}
+     */
     alreadyReviewed: function alreadyReviewed() {
       return this.hasReview || !this.booking;
     },
+
+    /**
+     * Checking if the bookable resort has review or not
+     * @returns {boolean}
+     */
     hasReview: function hasReview() {
       return this.existingReview != null;
     },
+
+    /**
+     * Checks if a customer has a booking in the particular place to show the link of the place
+     * @returns {boolean}
+     */
     hasBooking: function hasBooking() {
       return this.booking != null;
     },
+
+    /**
+     * Renders one column layout
+     * @returns {boolean}
+     */
     oneCol: function oneCol() {
       return !this.loading && this.alreadyReviewed;
     },
+
+    /**
+     * Renders two column layout for the review form
+     * @returns {boolean}
+     */
     twoCol: function twoCol() {
       return this.loading || !this.alreadyReviewed;
     }
@@ -2466,7 +2517,7 @@ var render = function render() {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-8"
-  }, [_vm._v("Checkout form")]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("div", {
     staticClass: "col-md-4"
   }, [_c("div", {
     staticClass: "d-flex justify-content-between"
@@ -2978,7 +3029,7 @@ var render = function render() {
     staticClass: "card"
   }, [_c("div", {
     staticClass: "card-body"
-  }, [_vm.loading ? _c("div", [_vm._v("Loading...")]) : _vm._e(), _vm._v(" "), _vm.hasBooking ? _c("div", [_c("p", [_vm._v("\n                            Stayed at\n                            "), _c("router-link", {
+  }, [_vm.loading ? _c("div", [_vm._v("Loading...")]) : _vm._e(), _vm._v(" "), _vm.hasBooking ? _c("div", [_c("p", [_vm._v("\n                            Stayed\n                            "), _c("router-link", {
     attrs: {
       to: {
         name: "bookable",
@@ -7600,7 +7651,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nlabel[data-v-c0bd39d0] {\r\n    font-size: 0.7rem;\r\n    text-transform: uppercase;\r\n    color: gray;\r\n    font-weight: bolder;\n}\r\n", ""]);
+exports.push([module.i, "\nlabel[data-v-c0bd39d0] {\n    font-size: 0.7rem;\n    text-transform: uppercase;\n    color: gray;\n    font-weight: bolder;\n}\n", ""]);
 
 // exports
 
@@ -78496,10 +78547,20 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   actions: {
+    /**
+     * Setting the last search from and to dates
+     * @param context
+     * @param payload
+     */
     setLastSearch: function setLastSearch(context, payload) {
       localStorage.setItem('lastSearch', JSON.stringify(payload));
       context.commit('setLastSearch', payload);
     },
+
+    /**
+     * loading stored state from local storage
+     * @param commit
+     */
     loadStoredState: function loadStoredState(_ref) {
       var commit = _ref.commit;
       var lastSearch = localStorage.getItem('lastSearch');
@@ -78514,12 +78575,26 @@ __webpack_require__.r(__webpack_exports__);
         commit('setBasket', JSON.parse(basket));
       }
     },
+
+    /**
+     * Adding bookings to cart
+     * @param commit
+     * @param state
+     * @param payload
+     */
     addToBasket: function addToBasket(_ref2, payload) {
       var commit = _ref2.commit,
           state = _ref2.state;
       commit('addToBasket', payload);
       localStorage.setItem('basket', JSON.stringify(state.basket));
     },
+
+    /**
+     * Removing bookings to cart
+     * @param commit
+     * @param state
+     * @param payload
+     */
     removeFromBasket: function removeFromBasket(_ref3, payload) {
       var commit = _ref3.commit,
           state = _ref3.state;

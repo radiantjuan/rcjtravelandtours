@@ -63,6 +63,10 @@ export default {
         ...mapState({
             lastSearch: 'lastSearch'
         }),
+        /**
+         * Checking if the item is in basket already from global state
+         * @returns {boolean|*}
+         */
         inBasketAlready() {
             if (null === this.book_info) {
                 return false
@@ -72,6 +76,10 @@ export default {
         }
     },
     methods: {
+        /**
+         * Check the price stored in the backend
+         * @param hasAvailability
+         */
         checkPrice(hasAvailability) {
             if (!hasAvailability) {
                 this.price = null;

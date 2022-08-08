@@ -1,7 +1,9 @@
 <template>
     <div class="container">
         <div class="row">
-            <div class="col-md-8">Checkout form</div>
+            <div class="col-md-8">
+
+            </div>
             <div class="col-md-4">
                 <div class="d-flex justify-content-between">
                     <h6 class="text-uppercase text-secondary font-weight-bolder">Your Cart</h6>

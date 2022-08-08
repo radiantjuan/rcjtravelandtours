@@ -9,7 +9,7 @@
                         <div v-if="loading">Loading...</div>
                         <div v-if="hasBooking">
                             <p>
-                                Stayed at
+                                Stayed
                                 <router-link :to="{name: 'bookable', params: {id: booking.bookable.id} }">{{
                                         booking.bookable.title
                                     }}
@@ -117,18 +117,38 @@ export default {
         //     .then(() => this.loading = false);
     },
     computed: {
+        /**
+         * Checks if the booking is already been reviewed
+         * @returns {boolean}
+         */
         alreadyReviewed() {
             return this.hasReview || !this.booking;
         },
+        /**
+         * Checking if the bookable resort has review or not
+         * @returns {boolean}
+         */
         hasReview() {
             return this.existingReview != null;
         },
+        /**
+         * Checks if a customer has a booking in the particular place to show the link of the place
+         * @returns {boolean}
+         */
         hasBooking() {
             return this.booking != null;
         },
+        /**
+         * Renders one column layout
+         * @returns {boolean}
+         */
         oneCol() {
             return !this.loading && this.alreadyReviewed
         },
+        /**
+         * Renders two column layout for the review form
+         * @returns {boolean}
+         */
         twoCol() {
             return this.loading || !this.alreadyReviewed
         }
