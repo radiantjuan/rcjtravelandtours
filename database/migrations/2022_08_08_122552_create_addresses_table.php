@@ -17,7 +17,7 @@ class CreateAddressesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('first_names');
-            $table->string('last_names');
+            $table->string('last_name');
             $table->string('street');
             $table->string('city');
             $table->string('country');

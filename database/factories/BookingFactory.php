@@ -9,6 +9,7 @@ $factory->define(\App\Booking::class, function (Faker $faker) {
     $to = (clone $from)->addDay(random_int(0, 14));
     return [
         'from' => $from,
-        'to' => $to
+        'to' => $to,
+        'price' => random_int(15, 600)
     ];
 });
