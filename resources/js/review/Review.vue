@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <fatal-error v-if="error"/>
-        <success v-if="success" />
+        <success v-else-if="success"><h2>Review added!</h2></success>
         <div v-else class="row">
             <div :class="[{'col-md-4': twoCol},{'d-none': oneCol}]">
                 <div class="card">
@@ -87,7 +87,7 @@ export default {
             if (is404(err)) {
                 try {
                     this.booking = (await axios.get(`/api/booking-by-review/${this.review.id}`)).data.data
-                } catch(err) {
+                } catch (err) {
                     if (!is404(err)) {
                         this.error = true;
                     }

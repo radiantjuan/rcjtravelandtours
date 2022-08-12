@@ -1923,6 +1923,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       loading: false,
+      bookingAttempted: false,
       customer: {
         first_names: null,
         last_name: null,
@@ -1936,11 +1937,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errors: null
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['itemsInBasket'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['itemsInBasket'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
     basket: function basket(state) {
       return state.basket.items;
     }
-  })),
+  })), {}, {
+    success: function success() {
+      return !this.loading && 0 === this.basket.length && this.bookingAttempted;
+    }
+  }),
   methods: {
     book: function book() {
       var _this = this;
@@ -1957,6 +1962,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
       this.loading = true;
       this.errors = null;
+      this.bookingAttempted = true;
       axios.post('/api/checkout', payload).then(function (res) {
         _this.$store.dispatch('clearBasket');
       })["catch"](function (err) {
@@ -2557,7 +2563,7 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "container"
-  }, [_c("div", {
+  }, [!_vm.success ? _c("success", [_vm._v("\n        Congrats on your purchase\n    ")]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_vm.itemsInBasket ? _c("div", {
     staticClass: "col-md-8"
@@ -2915,7 +2921,7 @@ var render = function render() {
     }, [_c("i", {
       staticClass: "fas fa-trash-alt"
     })])])]);
-  }), 0)], 1)])]);
+  }), 0)], 1)])], 1);
 };
 
 var staticRenderFns = [];
@@ -3370,7 +3376,7 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "container"
-  }, [_vm.error ? _c("fatal-error") : _vm._e(), _vm._v(" "), _vm.success ? _c("success") : _c("div", {
+  }, [_vm.error ? _c("fatal-error") : _vm.success ? _c("success", [_c("h2", [_vm._v("Review added!")])]) : _c("div", {
     staticClass: "row"
   }, [_c("div", {
     "class": [{
@@ -3569,7 +3575,7 @@ var render = function render() {
     staticClass: "fas fa-thumbs-up"
   }), _vm._v(" "), _c("h1", {
     staticClass: "mt-4"
-  }, [_vm._v("Review Success!")]), _vm._v(" "), _c("h2", [_vm._v("Review added!")]), _vm._v(" "), _vm._t("default")], 2);
+  }, [_vm._v("Success!")]), _vm._v(" "), _vm._t("default")], 2);
 };
 
 var staticRenderFns = [];
@@ -8061,7 +8067,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.success[data-v-b58db574] {\n    color: #999;\n    font-size: 10rem;\n}\n", ""]);
+exports.push([module.i, "\n.success[data-v-b58db574] {\n    color: #999;\n    font-size: 2rem;\n}\n", ""]);
 
 // exports
 
