@@ -1932,7 +1932,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         country: null,
         state: null,
         zip: null
-      }
+      },
+      errors: null
     };
   },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['itemsInBasket'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -1942,6 +1943,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   methods: {
     book: function book() {
+      var _this = this;
+
       var payload = {
         customer: this.customer,
         bookings: this.basket.map(function (basketItem) {
@@ -1953,8 +1956,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })
       };
       this.loading = true;
-      axios.post('/api/checkout', payload).then(function (res) {})["catch"](function (err) {
-        console.log(err);
+      this.errors = null;
+      axios.post('/api/checkout', payload).then(function (res) {
+        _this.$store.dispatch('clearBasket');
+      })["catch"](function (err) {
+        _this.errors = err.response && err.response.data.errors;
+      }).then(function () {
+        _this.loading = false;
       });
     }
   }
@@ -2569,6 +2577,9 @@ var render = function render() {
       expression: "customer.first_names"
     }],
     staticClass: "form-control",
+    "class": [{
+      "is-invalid": _vm.errorFor("customer.first_names")
+    }],
     attrs: {
       type: "text",
       name: "first_name"
@@ -2583,7 +2594,11 @@ var render = function render() {
         _vm.$set(_vm.customer, "first_names", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("v-errors", {
+    attrs: {
+      errors: _vm.errorFor("customer.first_names")
+    }
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-6 form-group"
   }, [_c("label", {
     attrs: {
@@ -2597,6 +2612,9 @@ var render = function render() {
       expression: "customer.last_name"
     }],
     staticClass: "form-control",
+    "class": [{
+      "is-invalid": _vm.errorFor("customer.last_name")
+    }],
     attrs: {
       type: "text",
       name: "last_name"
@@ -2611,7 +2629,11 @@ var render = function render() {
         _vm.$set(_vm.customer, "last_name", $event.target.value);
       }
     }
-  })])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("v-errors", {
+    attrs: {
+      errors: _vm.errorFor("customer.last_name")
+    }
+  })], 1)]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-12 form-group"
@@ -2627,6 +2649,9 @@ var render = function render() {
       expression: "customer.email"
     }],
     staticClass: "form-control",
+    "class": [{
+      "is-invalid": _vm.errorFor("customer.email")
+    }],
     attrs: {
       type: "text",
       name: "email"
@@ -2641,7 +2666,11 @@ var render = function render() {
         _vm.$set(_vm.customer, "email", $event.target.value);
       }
     }
-  })])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("v-errors", {
+    attrs: {
+      errors: _vm.errorFor("customer.email")
+    }
+  })], 1)]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-6 form-group"
@@ -2657,6 +2686,9 @@ var render = function render() {
       expression: "customer.street"
     }],
     staticClass: "form-control",
+    "class": [{
+      "is-invalid": _vm.errorFor("customer.street")
+    }],
     attrs: {
       type: "text",
       name: "street"
@@ -2671,7 +2703,11 @@ var render = function render() {
         _vm.$set(_vm.customer, "street", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("v-errors", {
+    attrs: {
+      errors: _vm.errorFor("customer.street")
+    }
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-6 form-group"
   }, [_c("label", {
     attrs: {
@@ -2685,6 +2721,9 @@ var render = function render() {
       expression: "customer.city"
     }],
     staticClass: "form-control",
+    "class": [{
+      "is-invalid": _vm.errorFor("customer.city")
+    }],
     attrs: {
       type: "text",
       name: "city"
@@ -2699,7 +2738,11 @@ var render = function render() {
         _vm.$set(_vm.customer, "city", $event.target.value);
       }
     }
-  })])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("v-errors", {
+    attrs: {
+      errors: _vm.errorFor("customer.city")
+    }
+  })], 1)]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-6 form-group"
@@ -2715,6 +2758,9 @@ var render = function render() {
       expression: "customer.country"
     }],
     staticClass: "form-control",
+    "class": [{
+      "is-invalid": _vm.errorFor("customer.country")
+    }],
     attrs: {
       type: "text",
       name: "country"
@@ -2729,7 +2775,11 @@ var render = function render() {
         _vm.$set(_vm.customer, "country", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("v-errors", {
+    attrs: {
+      errors: _vm.errorFor("customer.country")
+    }
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-4 form-group"
   }, [_c("label", {
     attrs: {
@@ -2743,6 +2793,9 @@ var render = function render() {
       expression: "customer.state"
     }],
     staticClass: "form-control",
+    "class": [{
+      "is-invalid": _vm.errorFor("customer.state")
+    }],
     attrs: {
       type: "text",
       name: "state"
@@ -2757,7 +2810,11 @@ var render = function render() {
         _vm.$set(_vm.customer, "state", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("v-errors", {
+    attrs: {
+      errors: _vm.errorFor("customer.state")
+    }
+  })], 1), _vm._v(" "), _c("div", {
     staticClass: "col-md-2 form-group"
   }, [_c("label", {
     attrs: {
@@ -2771,6 +2828,9 @@ var render = function render() {
       expression: "customer.zip"
     }],
     staticClass: "form-control",
+    "class": [{
+      "is-invalid": _vm.errorFor("customer.zip")
+    }],
     attrs: {
       type: "text",
       name: "zip"
@@ -2785,7 +2845,11 @@ var render = function render() {
         _vm.$set(_vm.customer, "zip", $event.target.value);
       }
     }
-  })])]), _vm._v(" "), _c("hr", {
+  }), _vm._v(" "), _c("v-errors", {
+    attrs: {
+      errors: _vm.errorFor("customer.zip")
+    }
+  })], 1)]), _vm._v(" "), _c("hr", {
     staticClass: "mb-4"
   }), _vm._v(" "), _c("div", {
     staticClass: "row"
@@ -2794,7 +2858,8 @@ var render = function render() {
   }, [_c("button", {
     staticClass: "btn-lg btn btn-primary btn-block",
     attrs: {
-      type: "submit"
+      type: "submit",
+      disabled: _vm.loading
     },
     on: {
       click: function click($event) {
@@ -78887,6 +78952,14 @@ __webpack_require__.r(__webpack_exports__);
       var commit = _ref3.commit,
           state = _ref3.state;
       commit('removeFromBasket', payload);
+      localStorage.setItem('basket', JSON.stringify(state.basket));
+    },
+    clearBasket: function clearBasket(_ref4, payload) {
+      var commit = _ref4.commit,
+          state = _ref4.state;
+      commit('setBasket', {
+        items: []
+      });
       localStorage.setItem('basket', JSON.stringify(state.basket));
     }
   },
