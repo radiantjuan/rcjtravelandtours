@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::apiResource('booklist', 'BookableController')->only(['index', 'show']);
 Route::get('bookable/{bookable_id}/availability', 'BookingController')->name('bookable.availability.show');
 Route::get('bookable/{bookable_id}/reviews','BookableReviewController')->name('bookable.review.index');

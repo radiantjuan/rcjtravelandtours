@@ -7991,7 +7991,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nh6.badge[data-v-9d55657e] {\n    font-size: 100%;\n}\n", ""]);
+exports.push([module.i, "\nh6.badge[data-v-9d55657e] {\r\n    font-size: 100%;\n}\r\n", ""]);
 
 // exports
 
@@ -8067,7 +8067,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.success[data-v-b58db574] {\n    color: #999;\n    font-size: 2rem;\n}\n", ""]);
+exports.push([module.i, "\n.success[data-v-b58db574] {\r\n    color: #999;\r\n    font-size: 2rem;\n}\r\n", ""]);
 
 // exports
 
@@ -77751,6 +77751,14 @@ var app = new Vue({
   },
   beforeCreate: function beforeCreate() {
     store.dispatch('loadStoredState');
+    axios.get('/sanctum/csrf-cookie').then(function () {
+      axios.post('/login', {
+        email: 'cory64@example.org',
+        password: 'password'
+      }).then(function () {
+        axios.get('/user');
+      });
+    });
   }
 });
 
@@ -78322,6 +78330,7 @@ try {
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.withCredentials = true;
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
