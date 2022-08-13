@@ -50,4 +50,16 @@ class LoginController extends Controller {
             return response(null, 204);
         }
     }
+
+    /**
+     * The user has logged out of the application.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return mixed
+     */
+    protected function loggedOut(Request $request) {
+        if ($request->isXmlHttpRequest()) {
+            return response(null, 204);
+        }
+    }
 }

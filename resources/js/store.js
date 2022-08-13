@@ -1,3 +1,5 @@
+import {isLoggedIn, logOut} from "./shared/utils/auth";
+
 export default {
     state: {
         lastSearch: {
@@ -6,7 +8,9 @@ export default {
         },
         basket: {
             items: []
-        }
+        },
+        isLoggedIn: false,
+        user: {}
     },
     mutations: {
         setLastSearch(state, payload) {
@@ -20,6 +24,12 @@ export default {
         },
         setBasket(state, payload) {
             state.basket = payload;
+        },
+        setUser(state, payload) {
+            state.user = payload
+        },
+        setLoggedIn(state, payload) {
+            state.isLoggedIn = payload;
         }
     },
     actions: {
@@ -46,6 +56,8 @@ export default {
             if (basket) {
                 commit('setBasket', JSON.parse(basket));
             }
+
+            commit('setLoggedIn', isLoggedIn());
         },
         /**
          * Adding bookings to cart
@@ -70,6 +82,21 @@ export default {
         clearBasket({commit, state}, payload) {
             commit('setBasket', {items: []});
             localStorage.setItem('basket', JSON.stringify(state.basket));
+        },
+        loadUser({commit, dispatch}) {
+            if (isLoggedIn()) {
+                axios.get('/user').then((response) => {
+                    commit("setUser", response.data);
+                    commit("setLoggedIn", true);
+                }).catch((error) => {
+                    dispatch('logout');
+                });
+            }
+        },
+        logout({commit}) {
+            commit('setUser', {});
+            commit('setLoggedIn', false);
+            logOut();
         }
     },
     getters: {

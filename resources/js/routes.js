@@ -3,6 +3,7 @@ import Bookable from "./bookables/Bookable";
 import Review from "./review/Review";
 import Basket from './basket/Basket';
 import VueRouter from "vue-router";
+import Register from "./auth/Register";
 
 /**
  * routes vue JS
@@ -27,6 +28,16 @@ const routes = [
         path: "/basket",
         name: "basket",
         component: Basket
+    },
+    {
+        path: "/auth/login",
+        name: "login",
+        component: require('./auth/Login').default
+    },
+    {
+        path: "/auth/register",
+        name: "register",
+        component: Register
     }
 ]
 

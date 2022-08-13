@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <success v-if="!success">
+        <success v-if="success">
             Congrats on your purchase
         </success>
         <div class="row">

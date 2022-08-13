@@ -22,6 +22,18 @@ Vue.component("success", Success);
 Vue.component("v-errors", ValidationError);
 
 const store = new Vuex.Store(storeDefinition);
+
+window.axios.interceptors.response.use(
+    response => response,
+    error => {
+        if (401 === error.response.status) {
+            store.dispatch('logout');
+        }
+
+        return Promise.reject(error);
+    }
+);
+
 const app = new Vue({
     el: '#app',
     router,
@@ -31,13 +43,6 @@ const app = new Vue({
     },
     beforeCreate() {
         store.dispatch('loadStoredState');
-        axios.get('/sanctum/csrf-cookie').then(() => {
-            axios.post('/login', {
-                email: 'cory64@example.org',
-                password: 'password'
-            }).then(() => {
-                axios.get('/user');
-            });
-        });
+        store.dispatch('loadUser');
     }
 });
