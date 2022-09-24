@@ -1,2 +1,5 @@
 ## RCJ Travel and tours
-This is an experimental system for my business
+This is an experimental booking system
+
+## License
+Copyright © 2022, [Radiant C. Juan](https://github.com/radiantjuan/)
